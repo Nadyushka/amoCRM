@@ -5,7 +5,7 @@ import {toRefs} from "vue";
 import {ContentType} from "../types/content"
 
 interface PropsType {
-  contentData: ContentType[]
+  contentData: ContentType[] | []
   selectedContent: string
 }
 

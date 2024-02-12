@@ -7,7 +7,7 @@ import VButton from "./components/VButton.vue"
 import {useContentStore} from "./store/content.ts"
 import {storeToRefs} from "pinia"
 import {useAuthStore} from "./store/auth.ts"
-import ShowContent from "./components/ShowContent.vue";
+import ShowContent from "./components/ShowContent.vue"
 
 const authStore = useAuthStore()
 
@@ -17,8 +17,11 @@ const {isLoading, companies, contacts, leads} = storeToRefs(contentStore)
 const selectedListValue = ref('Не выбрано')
 
 const btnIsUnable = computed(() => selectedListValue.value === 'Не выбрано')
+
 const showSelectedContent = computed(() => {
-  if (selectedListValue.value === 'Не выбрано') return
+  if (selectedListValue.value === 'Не выбрано') {
+    return []
+  }
   if (selectedListValue.value === 'Сделка') {
     return leads
   }
@@ -42,7 +45,7 @@ const addContent = async () => {
 }
 
 onMounted(async () => {
-  // await authStore.auth()
+  await authStore.auth()
 })
 </script>
 
