@@ -6,6 +6,7 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "lib": [ "es2015" ]
   },
   "include": [
     "vite.config.ts"

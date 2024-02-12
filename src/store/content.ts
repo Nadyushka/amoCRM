@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import {api} from "../services/api";
 import {ContentTypes} from "../types/content";
 
+
 export const useContentStore = defineStore("content", {
     state: () => ({
         isLoading: false,
