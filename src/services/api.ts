@@ -1,20 +1,20 @@
 import axios from "axios"
 import {useAuthStore} from "../store/auth"
-import { Promise } from 'es6-promise'
 
-export const api = axios.create({
-  baseURL: "https://rmxtfurm45mw01.amocrm.ru/api/v4/"
-})
+export const api = axios.create()
 
 
 api.interceptors.request.use(
-  (config) => {
-    const authStore = useAuthStore()
-    const access = authStore?.accessToken
-    if (access) {
-      config.headers.Authorization = `Bearer ${access}`
-    }
-    return config
-  },
-  async (error) => await Promise.reject(error)
+    (config) => {
+        const authStore = useAuthStore()
+        const access = authStore?.accessToken
+
+        config.baseURL = authStore.baseUrl
+
+        if (access) {
+            config.headers.Authorization = `Bearer ${access}`
+        }
+        return config
+    },
+    async (error) => await Promise.reject(error)
 )
