@@ -1,7 +1,9 @@
 import axios from "axios"
 import {useAuthStore} from "../store/auth"
 
-export const api = axios.create()
+export const api = axios.create({
+    baseURL: 'https://rmxtfurm45mw01.amocrm.ru/api/v4'
+})
 
 
 api.interceptors.request.use(
@@ -9,9 +11,7 @@ api.interceptors.request.use(
         const authStore = useAuthStore()
         const access = authStore?.accessToken
 
-        config.baseURL = authStore.baseUrl
-
-        if (access) {
+         if (access) {
             config.headers.Authorization = `Bearer ${access}`
         }
         return config
