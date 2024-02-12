@@ -20,7 +20,6 @@ export const useContentStore = defineStore("content", {
                 this.isLoading = true
 
                 const payload = [{
-                    "name": title,
                 }]
 
                 const res = await api.post(`${type}`, payload)
