@@ -4,11 +4,11 @@ import {toRefs} from "vue";
 interface PropsType {
   title: string
   isLoading?: boolean
-  isUnable?: boolean
+  isDisable?: boolean
 }
 
 const props = defineProps<PropsType>()
-const {title, isLoading, isUnable} = toRefs(props)
+const {title, isLoading, isDisable} = toRefs(props)
 
 defineEmits<{ (emit: 'btnClick'): void }>()
 
@@ -18,12 +18,12 @@ defineEmits<{ (emit: 'btnClick'): void }>()
   <button
       class="button"
       :class=" {
-          'button_enable': isUnable
+          'button_enable': isDisable
         }"
       :style="{
         'padding': isLoading && '4px 10px'
       }"
-      :disabled="isUnable"
+      :disabled="isDisable"
       @click="$emit('btnClick')"
   >
 

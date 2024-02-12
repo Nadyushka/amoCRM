@@ -1,28 +1,40 @@
-import {defineStore} from "pinia";
-import {api} from "../services/api";
-import {ContentTypes} from "../types/content";
+import {defineStore} from "pinia"
+import {api} from "../services/api"
+import {ContentType, ContentTypes} from "../types/content"
+import {AxiosError} from "axios";
 
 
 export const useContentStore = defineStore("content", {
     state: () => ({
         isLoading: false,
-        leads: [],
-        contacts: [],
-        companies: []
+        leads: [] as ContentType[],
+        contacts: [] as ContentType[],
+        companies: [] as ContentType[],
+        error: null as null | string
 
     }),
-    getters: {},
+
     actions: {
-        async createContent(type: ContentTypes) {
+        async createContent(type: ContentTypes, title: string) {
             try {
                 this.isLoading = true
 
-                const res = await api.post(`${type}`)
+                const payload = [{
+                    "name": title,
+                }]
 
-                this[type] = res.data?.['_embedded']?.type
+                const res = await api.post(`${type}`, payload)
 
-            } catch {
+                this[type] = [...res.data?.['_embedded'][type], ...this[type]]
 
+            } catch (e: unknown) {
+
+                const error = e as AxiosError
+                if (error.response.data?.detail === "Request data can not be empty") {
+                    this.error = 'Необходимо ввести наименование'
+                } else {
+                    this.error = error.response.data.detail
+                }
             } finally {
                 this.isLoading = false
             }

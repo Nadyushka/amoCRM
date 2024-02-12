@@ -1,7 +1,5 @@
 <script setup lang="ts">
-
-
-import {toRefs} from "vue";
+import { toRefs} from "vue";
 import {ContentType} from "../types/content"
 
 interface PropsType {
@@ -11,7 +9,6 @@ interface PropsType {
 
 const props = defineProps<PropsType>()
 const {contentData, selectedContent} = toRefs(props)
-
 </script>
 
 <template>
@@ -30,5 +27,7 @@ const {contentData, selectedContent} = toRefs(props)
   margin-bottom: 8px;
   border-bottom: 1px solid black;
   padding: 4px 0;
+  display: flex;
+  gap: 16px;
 }
 </style>

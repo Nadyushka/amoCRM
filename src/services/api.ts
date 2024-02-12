@@ -1,19 +1,21 @@
 import axios from "axios"
-import {useAuthStore} from "../store/auth"
+import { useAuthStore } from "../store/auth"
+import {storeToRefs} from "pinia";
 
-export const api = axios.create({
-    baseURL: 'https://rmxtfurm45mw01.amocrm.ru/api/v4'
-})
+export const api = axios.create()
 
 
 api.interceptors.request.use(
     (config) => {
         const authStore = useAuthStore()
-        const access = authStore?.accessToken
+        const { accessToken , baseUrl} = storeToRefs(authStore)
 
-         if (access) {
-            config.headers.Authorization = `Bearer ${access}`
+        config.baseURL = baseUrl.value
+
+         if (accessToken.value) {
+            config.headers.Authorization = `Bearer ${accessToken.value}`
         }
+
         return config
     },
     async (error) => await Promise.reject(error)
