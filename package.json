@@ -9,11 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.15",
     "axios": "^0.24.0",
-    "pinia": "^2.0.13"
+    "pinia": "^2.0.13",
+    "vue": "^3.4.15"
   },
   "devDependencies": {
+    "@types/es6-promise": "^3.3.0",
     "@vitejs/plugin-vue": "^5.0.3",
     "typescript": "^5.2.2",
     "vite": "^5.1.0",
