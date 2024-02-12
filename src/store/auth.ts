@@ -24,6 +24,11 @@ export const useAuthStore = defineStore("auth", {
                 this.baseUrl = 'https://' + res.data.base_domain + '/api/v4/'
 
             } catch (error) {
+                if (error?.response?.data?.detail) {
+                    this.error = error.response.data.detail
+                } else {
+                    this.error = 'Cors не дают пройти авторизацию'
+                }
 
             } finally {
                 this.isLoading = false
