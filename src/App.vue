@@ -67,6 +67,7 @@ onMounted(async () => {
     </div>
 
     <ShowContent
+        v-if="showSelectedContent.length"
         :selected-content="selectedListValue"
         :content-data="showSelectedContent"/>
 

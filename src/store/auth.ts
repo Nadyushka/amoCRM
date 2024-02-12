@@ -22,8 +22,7 @@ export const useAuthStore = defineStore("auth", {
                 this.accessToken = res.data.access_token
 
             } catch (error) {
-                console.log(error)
-                this.error = error
+
             } finally {
                 this.isLoading = false
             }
